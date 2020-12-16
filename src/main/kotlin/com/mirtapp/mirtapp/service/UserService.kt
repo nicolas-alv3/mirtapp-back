@@ -25,7 +25,7 @@ class UserService(val userDAO: UserDAO, val productDAO: ProductDAO) {
 
     fun addShList(shList: ShoppingListDTO): User {
         var user = userDAO.get(shList.ownerId)
-        val newShList = ShoppingList(owner = user)
+        val newShList = ShoppingList(itsOwner = user)
         newShList.addList(shList.items.map { i -> fetchItem(i,newShList) } as MutableList<Item>)
         user.addShoppingList(newShList)
         return userDAO.save(user)

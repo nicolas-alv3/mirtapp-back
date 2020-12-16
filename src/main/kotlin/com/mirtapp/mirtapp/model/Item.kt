@@ -10,9 +10,9 @@ class Item(
         @OneToOne(cascade = [CascadeType.ALL])
         val product: Product = Product(),
         @ManyToOne(fetch = FetchType.LAZY,cascade = [CascadeType.ALL])
-        @JoinColumn(name="owner_id")
+        @JoinColumn(name="itsowner_id")
         @JsonIgnore
-        val owner : ShoppingList = ShoppingList()
+        val itsOwner : ShoppingList = ShoppingList()
 ) : AbstractJpaPersistable<Long>() {
     constructor() : this(0,ProductMeasure.CAJA) {}
     fun price() = amount * product.price
