@@ -3,8 +3,10 @@ package com.mirtapp.mirtapp.model
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
+@Table(name = "USERs")
 class User(
         var fullName:String,
         var email:String,
