@@ -1,5 +1,6 @@
 package com.mirtapp.mirtapp.persistence
 
+import com.mirtapp.mirtapp.model.Item
 import com.mirtapp.mirtapp.model.Product
 import com.mirtapp.mirtapp.persistence.repository.ProductRepository
 import org.springframework.stereotype.Component
@@ -15,5 +16,9 @@ class ProductDAO(val productRepository: ProductRepository) {
 
     fun getAll(): List<Product> {
         return productRepository.findAll()
+    }
+
+    fun get(productId: Long): Product {
+        return productRepository.getOne(productId)
     }
 }
