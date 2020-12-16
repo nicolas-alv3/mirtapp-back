@@ -1,0 +1,16 @@
+language: java
+
+env:
+  global:
+    - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/Mirtapp
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=root
+
+services: postgresql
+
+before_script:
+  - psql -c 'create database "Mirtapp";' -U postgres
+  - psql -c "CREATE USER root WITH PASSWORD 'root';" -U postgres
+
+script:
+  - mvn test
