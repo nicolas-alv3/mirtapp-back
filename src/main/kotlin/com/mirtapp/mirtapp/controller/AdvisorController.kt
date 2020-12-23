@@ -1,7 +1,9 @@
 package com.mirtapp.mirtapp.controller
 
 import com.loshermanos.service.exception.MirtappException
+import com.mirtapp.mirtapp.model.Item
 import com.mirtapp.mirtapp.model.Product
+import com.mirtapp.mirtapp.service.AdvisorService
 import com.mirtapp.mirtapp.service.ProductService
 import com.mirtapp.mirtapp.service.UserService
 import org.springframework.context.annotation.Scope
@@ -15,8 +17,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @CrossOrigin
 @RestController
 @Scope(value = "session")
-@Component(value = "productController")
-class ProductController (val productService: ProductService){
+@Component(value = "advisorController")
+class AdvisorController (val advisorService: AdvisorService){
 
     @ControllerAdvice
     class ControllerAdviceRequestError : ResponseEntityExceptionHandler() {
@@ -25,25 +27,9 @@ class ProductController (val productService: ProductService){
             return ResponseEntity(ex.message, ex.status)
         }
     }
-
-    @PostMapping("/product")
-    fun postProduct(@RequestBody body: Product): ResponseEntity<Product> {
-        return ResponseEntity(productService.save(body),HttpStatus.OK)
-    }
-
-    @PostMapping("/delete/product/{id}")
-    fun deleteProduct(@PathVariable id: Long): ResponseEntity<Unit> {
-        return ResponseEntity(productService.deleteById(id),HttpStatus.OK)
-    }
-
-    @GetMapping("/product")
-    fun getProduct(): ResponseEntity<List<Product>> {
-        return ResponseEntity(productService.getAll(),HttpStatus.OK)
-    }
-
-    @GetMapping("/product/{id}")
-    fun getProductById(@PathVariable id :Long): ResponseEntity<Product> {
-        return ResponseEntity(productService.getById(id),HttpStatus.OK)
+    @GetMapping("/advice/{userId}/{providerId}")
+    fun getAdviceFor(@PathVariable userId : Long,@PathVariable providerId : Long): ResponseEntity<List<Item>> {
+        return ResponseEntity(advisorService.getAdviceFor(userId,providerId),HttpStatus.OK)
     }
 
 }

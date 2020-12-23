@@ -19,6 +19,18 @@ class ProductDAO(val productRepository: ProductRepository) {
     }
 
     fun get(productId: Long): Product {
-        return productRepository.getOne(productId)
+        return productRepository.findById(productId).get()
+    }
+
+    fun existsWithSameDescription(description:String): Boolean {
+        return productRepository.existsByDescription(description)
+    }
+
+    fun existById(id: Long): Boolean {
+        return productRepository.existsById(id)
+    }
+
+    fun deleteById(id: Long) {
+        return productRepository.deleteById(id)
     }
 }
