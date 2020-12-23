@@ -18,26 +18,16 @@ abstract class AbstractJpaPersistable<T : Serializable> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: T? = null
 
-    fun getId(): T? {
+    open fun getId(): T? {
         return id
     }
 
-    override fun equals(other: Any?): Boolean {
-        other ?: return false
-
-        if (this === other) return true
-
-        if (javaClass != ProxyUtils.getUserClass(other)) return false
-
-        other as AbstractJpaPersistable<*>
-
-        return if (null == this.getId()) false else this.getId() == other.getId()
+    open fun setId(newId : T?) {
+        id =newId
     }
 
     override fun hashCode(): Int {
         return 31
     }
-
-    override fun toString() = "Entity of type ${this.javaClass.name} with id: $id"
 
 }

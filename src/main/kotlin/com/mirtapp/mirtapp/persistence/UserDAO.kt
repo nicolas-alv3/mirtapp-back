@@ -18,6 +18,18 @@ class UserDAO(val userRepository: UserRepository) {
     }
 
     fun get(userId: Long): User {
-        return userRepository.getOne(userId)
+        return userRepository.findById(userId).get()
+    }
+
+    fun existByEmail(email: String): Boolean {
+        return userRepository.existsByEmail(email)
+    }
+
+    fun getByEmail(email: String): User {
+        return userRepository.findUserByEmail(email)
+    }
+
+    fun existById(id:Long): Boolean {
+        return userRepository.existsById(id)
     }
 }
